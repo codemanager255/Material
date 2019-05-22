@@ -80,7 +80,7 @@ public class Chat extends Fragment {
 
       //  linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
-      //  recyclerView.setLayoutManager(linearLayoutManager);
+       recyclerView.setLayoutManager(linearLayoutManager);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
 
@@ -90,58 +90,10 @@ public class Chat extends Fragment {
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
 
 
-        recyclerView.setLayoutManager(staggeredGridLayoutManager);
+       // recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
-        ArrayList<ChatModel> list = new ArrayList<>();
-
-        ChatModel chatModel1 = new ChatModel();
-        chatModel1.setTitle("Hyderbad");
-        chatModel1.setImageName("apple_pie");
-        chatModel1.setPrice(22.0);
-
-        list.add(chatModel1);
-
-        ChatModel chatModel2 = new ChatModel();
-        chatModel2.setTitle("Bangalore");
-        chatModel2.setImageName("berry_tart");
-        chatModel2.setPrice(22.0);
-        list.add(chatModel2);
-
-        ChatModel chatModel3 = new ChatModel();
-        chatModel3.setTitle("Chennai");
-        chatModel3.setImageName("brownie");
-        chatModel3.setPrice(22.0);
-
-
-        list.add(chatModel3);
-
-        ChatModel chatModel4 = new ChatModel();
-        chatModel4.setTitle("Kochi");
-        chatModel4.setImageName("cafe_latte");
-        chatModel4.setPrice(22.0);
-
-        list.add(chatModel4);
-
-        ChatModel chatModel5 = new ChatModel();
-        chatModel5.setTitle("Pune");
-        chatModel5.setImageName("cafe_latte");
-        chatModel5.setPrice(22.0);
-
-        list.add(chatModel5);
-
-        ChatModel chatModel6 = new ChatModel();
-        chatModel6.setTitle("Delhi");
-        chatModel6.setImageName("classic_burger");
-        chatModel6.setPrice(22.0);
-
-        list.add(chatModel6);
-
-
-
-
-        ChatRecyclerViewAdapter chatRecyclerViewAdapter = new ChatRecyclerViewAdapter(list, getContext());
-
-        recyclerView.setAdapter(chatRecyclerViewAdapter);
+    HorizontalRecyclerViewAdapter horizontalRecyclerViewAdapter = new HorizontalRecyclerViewAdapter();
+    recyclerView.setAdapter(horizontalRecyclerViewAdapter);
 
         return view;
     }
