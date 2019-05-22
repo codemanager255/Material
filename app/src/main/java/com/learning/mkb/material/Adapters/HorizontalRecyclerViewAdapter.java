@@ -1,20 +1,26 @@
-package com.learning.mkb.material;
+package com.learning.mkb.material.Adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
+import com.learning.mkb.material.Interfaces.RecyclerViewOnItemClickListener;
 import com.learning.mkb.material.Model.ChatModel;
+import com.learning.mkb.material.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class HorizontalRecyclerViewAdapter extends RecyclerView.Adapter<HorizontalRecyclerViewAdapter.ViewHolder> {
+
+    RecyclerViewOnItemClickListener recyclerViewOnItemClickListener;
+
+    public HorizontalRecyclerViewAdapter(RecyclerViewOnItemClickListener recyclerViewOnItemClickListener) {
+        this.recyclerViewOnItemClickListener = recyclerViewOnItemClickListener;
+    }
 
     @NonNull
     @Override
@@ -114,10 +120,15 @@ public class HorizontalRecyclerViewAdapter extends RecyclerView.Adapter<Horizont
 
             list.add(chatModel6);
 
-            ChatRecyclerViewAdapter chatRecyclerViewAdapter = new ChatRecyclerViewAdapter(list, itemView.getContext());
+            ChatRecyclerViewAdapter chatRecyclerViewAdapter = new ChatRecyclerViewAdapter(list, itemView.getContext(), recyclerViewOnItemClickListener);
 
             recyclerView.setAdapter(chatRecyclerViewAdapter);
 
         }
+
+
+        }
     }
-}
+
+
+

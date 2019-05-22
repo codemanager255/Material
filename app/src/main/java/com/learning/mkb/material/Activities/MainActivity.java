@@ -1,4 +1,4 @@
-package com.learning.mkb.material;
+package com.learning.mkb.material.Activities;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,7 +13,13 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity implements Chat.OnFragmentInteractionListener, StatusFragment.OnFragmentInteractionListener,SettingFragment.OnFragmentInteractionListener{
+import com.learning.mkb.material.Adapters.HomeTabPageAdapter;
+import com.learning.mkb.material.View.Chat;
+import com.learning.mkb.material.R;
+import com.learning.mkb.material.View.SettingFragment;
+import com.learning.mkb.material.View.StatusFragment;
+
+public class MainActivity extends AppCompatActivity implements Chat.OnFragmentInteractionListener, StatusFragment.OnFragmentInteractionListener,SettingFragment.OnFragmentInteractionListener {
 
     Toolbar toolbar;
     TabLayout homePageTabLaout;

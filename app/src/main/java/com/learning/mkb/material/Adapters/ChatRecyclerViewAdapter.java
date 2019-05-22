@@ -1,4 +1,4 @@
-package com.learning.mkb.material;
+package com.learning.mkb.material.Adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.learning.mkb.material.Interfaces.RecyclerViewOnItemClickListener;
 import com.learning.mkb.material.Model.ChatModel;
+import com.learning.mkb.material.R;
 
 import java.util.ArrayList;
 
@@ -19,10 +21,12 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
 
     ArrayList<ChatModel> chatModelList;
     Context context;
+    RecyclerViewOnItemClickListener recyclerViewOnItemClickListener;
 
-    public ChatRecyclerViewAdapter(ArrayList<ChatModel> chatModelList, Context context) {
+    public ChatRecyclerViewAdapter(ArrayList<ChatModel> chatModelList, Context context, RecyclerViewOnItemClickListener recyclerViewOnItemClickListener) {
         this.chatModelList= chatModelList;
         this.context = context;
+        this.recyclerViewOnItemClickListener = recyclerViewOnItemClickListener;
     }
 
     @NonNull
@@ -52,6 +56,7 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
         holder.chatImageView.setImageDrawable(res);
 
 
+        holder.onBind(chatModelList.get(position));
     }
 
     @Override
@@ -71,5 +76,14 @@ public class ChatRecyclerViewAdapter extends RecyclerView.Adapter<ChatRecyclerVi
             chatTextView = (TextView) itemView.findViewById(R.id.chatTextView);
             chatImageView = (ImageView) itemView.findViewById(R.id.imageView);
         }
-    }
+
+        public void onBind(final ChatModel chatModel) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    recyclerViewOnItemClickListener.onItemClick(chatModel);
+                }
+            });
+        }
+        }
 }

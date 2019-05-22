@@ -1,23 +1,35 @@
-package com.learning.mkb.material;
+package com.learning.mkb.material.View;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.learning.mkb.material.Activities.CityDetailsActivity;
+import com.learning.mkb.material.Adapters.HorizontalRecyclerViewAdapter;
+import com.learning.mkb.material.Interfaces.RecyclerViewOnItemClickListener;
+import com.learning.mkb.material.Model.ChatModel;
+import com.learning.mkb.material.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link StatusFragment.OnFragmentInteractionListener} interface
+ * {@link Chat.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link StatusFragment#newInstance} factory method to
+ * Use the {@link Chat#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StatusFragment extends Fragment {
+public class Chat extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +41,7 @@ public class StatusFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public StatusFragment() {
+    public  Chat() {
         // Required empty public constructor
     }
 
@@ -39,11 +51,11 @@ public class StatusFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment StatusFragment.
+     * @return A new instance of fragment Chat.
      */
     // TODO: Rename and change types and number of parameters
-    public static StatusFragment newInstance(String param1, String param2) {
-        StatusFragment fragment = new StatusFragment();
+    public static Chat newInstance(String param1, String param2) {
+        Chat fragment = new Chat();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,7 +76,42 @@ public class StatusFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_status, container, false);
+        View view =  inflater.inflate(R.layout.fragment_chat, container, false);
+
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.chatRecyclerView);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+
+      //  linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+       recyclerView.setLayoutManager(linearLayoutManager);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
+
+      //  recyclerView.setLayoutManager(gridLayoutManager);
+
+
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+
+
+       // recyclerView.setLayoutManager(staggeredGridLayoutManager);
+
+    HorizontalRecyclerViewAdapter horizontalRecyclerViewAdapter = new HorizontalRecyclerViewAdapter(new RecyclerViewOnItemClickListener() {
+        @Override
+        public void onItemClick(ChatModel chatModel) {
+
+            Toast.makeText(getContext(),chatModel.getTitle(), Toast.LENGTH_SHORT ).show();
+
+            Intent intent = new Intent(getContext(), CityDetailsActivity.class);
+
+            startActivity(intent);
+        }
+    });
+    recyclerView.setAdapter(horizontalRecyclerViewAdapter);
+
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
