@@ -1,5 +1,6 @@
 package com.learning.mkb.material.View;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.learning.mkb.material.Activities.ChatDeatails;
 import com.learning.mkb.material.Activities.CityDetailsActivity;
 import com.learning.mkb.material.Adapters.HorizontalRecyclerViewAdapter;
 import com.learning.mkb.material.Interfaces.RecyclerViewOnItemClickListener;
@@ -103,13 +105,13 @@ public class Chat extends Fragment  {
 
            // Toast.makeText(getContext(),chatModel.getTitle(), Toast.LENGTH_SHORT ).show();
 
-            Intent intent = new Intent(getContext(), CityDetailsActivity.class);
+            Intent intent = new Intent(getContext(), ChatDeatails.class);
 
             intent.putExtra("City",chatModel.getTitle());
 
 
 
-            startActivity(intent);
+            startActivityForResult(intent,0);
         }
     });
     recyclerView.setAdapter(horizontalRecyclerViewAdapter);
@@ -117,6 +119,25 @@ public class Chat extends Fragment  {
 
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+           if (requestCode == 1) {
+               if (resultCode == Activity.RESULT_OK) {
+
+                   String returnString = data.getStringExtra("result");
+
+                   Toast.makeText(getContext(),returnString,Toast.LENGTH_SHORT).show();
+
+               }
+               if (requestCode == Activity.RESULT_CANCELED){
+                   Toast.makeText(getContext(),"Canceled",Toast.LENGTH_SHORT).show();
+               }
+           }
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

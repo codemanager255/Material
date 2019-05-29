@@ -19,7 +19,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.CityDetailsActivity"></activity>
+        <activity android:name=".Activities.CityDetailsActivity" />
+        <activity
+            android:name=".Activities.ChatDeatails"
+            android:label="@string/title_activity_chat_deatails"
+            android:parentActivityName=".Activities.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.learning.mkb.material.Activities.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
