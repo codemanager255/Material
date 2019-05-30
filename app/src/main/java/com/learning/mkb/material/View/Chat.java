@@ -105,12 +105,9 @@ public class Chat extends Fragment  {
 
            // Toast.makeText(getContext(),chatModel.getTitle(), Toast.LENGTH_SHORT ).show();
 
-            Intent intent = new Intent(getContext(), ChatDeatails.class);
+            Intent intent = new Intent(getContext(), CityDetailsActivity.class);
 
             intent.putExtra("City",chatModel.getTitle());
-
-
-
             startActivityForResult(intent,0);
         }
     });
@@ -125,7 +122,7 @@ public class Chat extends Fragment  {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-           if (requestCode == 1) {
+           if (requestCode == 0 ) {
                if (resultCode == Activity.RESULT_OK) {
 
                    String returnString = data.getStringExtra("result");
