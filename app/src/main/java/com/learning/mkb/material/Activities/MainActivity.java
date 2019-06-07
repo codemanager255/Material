@@ -9,18 +9,29 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.learning.mkb.material.Adapters.HomeTabPageAdapter;
+import com.learning.mkb.material.Model.MovieResponce;
+import com.learning.mkb.material.Network.APIClient;
+import com.learning.mkb.material.Network.APIInterface;
 import com.learning.mkb.material.View.Chat;
 import com.learning.mkb.material.R;
 import com.learning.mkb.material.View.SettingFragment;
 import com.learning.mkb.material.View.StatusFragment;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity implements Chat.OnFragmentInteractionListener, StatusFragment.OnFragmentInteractionListener,SettingFragment.OnFragmentInteractionListener {
 
+
+    private static final String API_KEY = "55fa25ae93e0d012adafaa39fc905e31";
     Toolbar toolbar;
     TabLayout homePageTabLaout;
     ViewPager homePageViewPager;
@@ -102,6 +113,28 @@ public class MainActivity extends AppCompatActivity implements Chat.OnFragmentIn
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
+        APIInterface apiService = APIClient.getClient().create(APIInterface.class);
+
+        Call<MovieResponce> call = apiService.getTopRatedMovies(API_KEY);
+
+        call.enqueue(new Callback<MovieResponce>() {
+            @Override
+            public void onResponse(Call<MovieResponce> call, Response<MovieResponce> response) {
+
+                Log.d("Result",response.body().getMovies().toString());
+
+                Toast.makeText(getApplicationContext(),response.body().toString(),Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<MovieResponce> call, Throwable t) {
+
+                Log.d("Result",t.toString());
 
             }
         });
